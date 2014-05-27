@@ -1,0 +1,6 @@
+#!/bin/bash
+
+while true; do
+	rm /home/pi/.ppcoin/addr.dat
+	/home/pi/ppcoind.v0.4 -datadir=/home/pi/.ppcoin -printtoconsole
+done
