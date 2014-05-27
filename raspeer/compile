@@ -1,0 +1,37 @@
+#!/bin/bash
+
+#passwd
+#sudo update-rc.d lightdm disable 2
+#sudo /usr/bin/raspi-config --expand-rootfs
+#sudo shutdown -r now
+
+sudo apt-get -y --purge remove midori netsurf-common netsurf-gtk penguinspuzzle python-pygame scratch timidity wolfram-engine squeak-vm squeak-plugins-scratch dillo idle idle3 idle-python2.7 idle-python3.2 python-numpy python-support
+
+sudo apt-get -y update
+sudo apt-get -y upgrade
+
+sudo apt-get -y install ssmtp mailutils tmux
+
+sudo apt-get -y install build-essential libboost-dev libboost-system-dev libboost-filesystem-dev libboost-program-options-dev libboost-thread-dev libssl-dev libdb++-dev libminiupnpc-dev git g++ g++-4.6
+
+sudo dd if=/dev/zero of=/swapfile bs=64M count=16
+sudo mkswap /swapfile
+sudo swapon /swapfile
+cd /home/pi
+
+git clone https://github.com/ppcoin/ppcoin.git
+cd ppcoin/src
+
+make STATIC=1 -f makefile.unix ppcoind USE_UPNP=
+
+sudo swapoff /swapfile
+sudo rm -f /swapfile
+
+#sudo apt-get install ntpdate
+
+#sudo apt-get -y install ufw
+#sudo ufw allow 9901
+#sudo ufw allow 22
+#sudo ufw --force enable
+#sudo ufw status
+
